@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [[ -z "$1" || -z "$2" ]]; then
+  echo "Usage: $0 <username> <cid>"
+  exit 1
+fi
+
+# First parameter is username
+username=$1
+
+# Second parameter is cid of username
+cid=$2
+
+# Random uuid
+uuid=$(curl -s "uuid4.com/?count=1")
+
+# Generate referer URL
+ref="https://www.etoro.com/people/$username/portfolio"
+
+# Generate data source URL
+url="https://www.etoro.com/sapi/trade-data-real/live/public/portfolios?cid=$cid&client_request_id=$uuid"
+
+# Set user-agent
+ua="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.112 Safari/534.30"
+
+# Accept JSON header
+accept="accept: application/json"
+
+# Fetch data and print to stdout
+curl -sL -H "$accept" -A "$ua" -e "$ref" "$url"
+
+# Throttle
+sleep 10

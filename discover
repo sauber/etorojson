@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+  echo "Usage: $0 <filter>"
+  exit 1
+fi
+
+# Parameter is username
+filter=$1
+
+# Random uuid
+uuid=$(curl -s "uuid4.com/?count=1")
+
+# Generate referer URL
+ref="https://www.etoro.com/discover/people/results?copyblock=false&period=OneYearAgo&page=1&$filter"
+
+# Generate data source URL
+url="https://www.etoro.com/sapi/rankings/rankings/?blocked=false&bonusonly=false&client_request_id=$uuid&copyblock=false&istestaccount=false&optin=true&page=1&period=OneYearAgo&verified=true&isfund=false&$filter"
+
+# Set user-agent
+ua=Chrome
+
+# Accept JSON header
+accept="accept: application/json"
+
+# Fetch data and print to stdout
+curl -sL -H "$accept" -A "$ua" -e "$ref" "$url"
+
+# Throttle
+sleep 10
