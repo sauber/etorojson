@@ -24,7 +24,7 @@ ua=Chrome
 accept="accept: application/json"
 
 # Fetch data and print to stdout
-curl -sL -H "$accept" -A "$ua" -e "$ref" "$url"
+curl -sL -H "$accept" -A "$ua" -e "$ref" "$url" | perl -ple '/error code/ and exit 1' || exit 1
 
 # Throttle
 sleep 10

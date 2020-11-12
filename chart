@@ -24,7 +24,7 @@ ua="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, li
 accept="accept: application/json"
 
 # Fetch data and print to stdout
-curl -sL -H "$accept" -A "$ua" -e "$ref" "$url"
+curl -sL -H "$accept" -A "$ua" -e "$ref" "$url" | perl -ple '/error code/ and exit 1' || exit 1
 
 # Throttle
 sleep 10
