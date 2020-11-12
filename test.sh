@@ -3,7 +3,7 @@
 # Verify script output
 
 # Verify output from Discover People
-./discover "copiersmin=1&dailyddmin=-4&gainmax=250&maxmonthlyriskscoremax=5&maxmonthlyriskscoremin=2&pagesize=70&profitablemonthspctmin=65&sort=-gain&weeklyddmin=-10&winratiomax=100&winratiomin=45&activeweeksmin=12&lastactivitymax=14" | jq | head -5
+./discover "dailyddmin=-25&gainmin=0&hasavatar=true&maxmonthlyriskscoremax=6&maxmonthlyriskscoremin=1&pagesize=20&popularinvestor=true&sort=-copiers" | head -5
 
 # Verify output from Portfolio
 ./portfolio jeppekirkbonde 2988943 | jq | head -7
